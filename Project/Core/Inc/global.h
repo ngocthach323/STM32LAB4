@@ -9,13 +9,13 @@
 #define INC_GLOBAL_H_
 
 #include "main.h"
-#include "software_timer.h"
 #include "button.h"
 #include "traffic_light.h"
 #include "led7_segment.h"
 #include "fsm_automatic.h"
 #include "fsm_manual.h"
 #include "fsm_setting.h"
+#include "scheduler.h"
 
 //define các trạng thái toàn hệ thống
 #define AUTO 			1
@@ -24,20 +24,18 @@
 #define GREEN_LED 		4
 
 //define trạng thái đèn giao thông mỗi chiều (AUTO)
-#define	INIT_VER		5
-#define RED_VER			6
-#define YELLOW_VER		7
-#define GREEN_VER		8
+#define RED_VER			5
+#define YELLOW_VER		6
+#define GREEN_VER		7
 
-#define	INIT_HOR		9
-#define RED_HOR			10
-#define YELLOW_HOR		11
-#define GREEN_HOR		12
+#define RED_HOR			8
+#define YELLOW_HOR		9
+#define GREEN_HOR		10
 
 //define trạng thái modify time duration từng led màu
-#define RED_MODIFY		13
-#define YELLOW_MODIFY	14
-#define GREEN_MODIFY	15
+#define RED_MODIFY		11
+#define YELLOW_MODIFY	12
+#define GREEN_MODIFY	13
 
 //đỏ
 extern int time_red_ver;			//time đèn đỏ (auto) của đèn giao thông chiều dọc
@@ -54,5 +52,15 @@ extern int time_green_ver;
 extern int time_green_hor;
 extern int time_green_ver_temp;
 extern int time_green_hor_temp;
+
+//đếm time cho led nhấp nháy 2Hz
+extern int count_toggle_led;
+
+//đếm time cho đèn giao thông auto
+extern int count_down_ver;
+extern int count_down_hor;
+
+//đếm time hiển thị led7SEG
+extern int count_led7SEG;
 
 #endif /* INC_GLOBAL_H_ */

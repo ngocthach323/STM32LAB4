@@ -9,15 +9,16 @@
 int status_modify = RED_MODIFY;
 
 void fsm_setting() {
+	if (status_system == AUTO) {
+		return;
+	}
 	switch (status_modify) {
 		case RED_MODIFY:
 			//tắt đèn vàng và xanh
 			turn_off_yellow_green();
-			if (timer_flag[4] == 1) {
-				//nhấp nháy đèn đỏ
-				toggle_red_led();
-				setTimer(4, 500);
-			}
+			//nhấp nháy đèn đỏ
+			toggle_red_led();
+
 			//button2
 			if (isButtonPressed(1) == 1) {
 				time_red_ver++;
@@ -32,11 +33,8 @@ void fsm_setting() {
 		case YELLOW_MODIFY:
 			//tắt đèn đỏ và xanh
 			turn_off_red_green();
-			if (timer_flag[4] == 1) {
-				//nhấp nháy đèn vàng
-				toggle_yellow_led();
-				setTimer(4, 500);
-			}
+			//nhấp nháy đèn vàng
+			toggle_yellow_led();
 			//button2
 			if (isButtonPressed(1) == 1) {
 				time_yellow_ver++;
@@ -56,11 +54,8 @@ void fsm_setting() {
 		case GREEN_MODIFY:
 			//tắt đèn đỏ và vàng
 			turn_off_red_yellow();
-			if (timer_flag[4] == 1) {
-				//nhấp nháy đèn xanh
-				toggle_green_led();
-				setTimer(4, 500);
-			}
+			//nhấp nháy đèn xanh
+			toggle_green_led();
 			//button2
 			if (isButtonPressed(1) == 1) {
 				time_green_ver++;

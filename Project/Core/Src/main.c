@@ -56,10 +56,6 @@ static void MX_TIM2_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-/*
- *
- *
- * */
 /* USER CODE END 0 */
 
 /**
@@ -97,18 +93,15 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  setTimer(2, 20);		// hiển thị 7SEG
-  setTimer(4, 250); 	// nhấp nháy đèn khi modify time duration tần số 2Hz
-  setTimer(9, 1000); 	// check setTimer
+  SCH_Init();
+  SCH_Add_Task(fsm_manual, 0, 500);
+  SCH_Add_Task(fsm_automatic, 50, 1000);
+  SCH_Add_Task(fsm_setting, 100, 250);
+
   while (1)
   {
     /* USER CODE END WHILE */
-	  if (timer_flag[9] == 1) {
-		  setTimer(9, 1000);
-		  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-	  }
-
-	  fsm_manual();
+	  SCH_Dispatch_Tasks();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -252,8 +245,8 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
-	timerRun();
 	getKeyInput();
+	SCH_Update();
 }
 /* USER CODE END 4 */
 
