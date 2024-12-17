@@ -52,9 +52,12 @@ void SCH_Dispatch_Tasks(void) {
 }
 
 void SCH_Delete_Tasks(uint32_t taskID) {
-	SCH_tasks_G[taskID].pTask = 0x0000;
-	SCH_tasks_G[taskID].Delay = 0;
-	SCH_tasks_G[taskID].Period = 0;
-	SCH_tasks_G[taskID].RunMe = 0;
+	for (uint32_t i = taskID; i < current_index_task; i++) {
+		SCH_tasks_G[i] = SCH_tasks_G[i + 1];
+	}
+	SCH_tasks_G[current_index_task].pTask = 0x0000;
+	SCH_tasks_G[current_index_task].Delay = 0;
+	SCH_tasks_G[current_index_task].Period = 0;
+	SCH_tasks_G[current_index_task].RunMe = 0;
 	current_index_task--;
 }

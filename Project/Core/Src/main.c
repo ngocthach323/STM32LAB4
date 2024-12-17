@@ -95,8 +95,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   SCH_Init();
   SCH_Add_Task(fsm_manual, 0, 500);
-  SCH_Add_Task(fsm_automatic, 50, 1000);
-  SCH_Add_Task(fsm_setting, 100, 250);
+  SCH_Add_Task(fsm_automatic, 10, 1000);
+  SCH_Add_Task(fsm_setting, 20, 250);
 
   while (1)
   {
